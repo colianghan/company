@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品价目表</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>商品价目表</h1>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="搜索商品...">
+            </div>
+        </header>
+        
+        <main>
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>正在加载数据，请稍候...</p>
+            </div>
+            <div class="table-container" id="tableContainer" style="display: none;">
+                <table id="priceTable">
+                    <thead id="tableHead"></thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+            </div>
+        </main>
+        
+        <footer>
+            <p>数据更新时间：<span id="updateTime"></span></p>
+        </footer>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html> 
