@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
             Object.keys(newItem).forEach(key => {
                 // 处理换行符，使其在HTML中正确显示
                 if (typeof newItem[key] === 'string') {
-                    newItem[key] = newItem[key].replace(/\r\n/g, '<br>');
+                    newItem[key] = newItem[key].replace(/\r\n/g, '<br>').replace(/\n/g, '<br>');
                 }
             });
             
@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <img src="${imgSrc}" alt="商品图片" class="product-card-image" onclick="showImageModal('${imgSrc}')">
                 </div>
                 <div class="card-info">
-                    <h3 class="product-title">${productName}</h3>
+                    <h3 class="product-title">${productName.replace(/\r\n/g, '<br>')}</h3>
                     <div class="product-price">￥${price}</div>
                     <div class="product-quantity">${quantity}</div>
                 </div>
@@ -197,8 +197,16 @@ document.addEventListener('DOMContentLoaded', function() {
         // 生成表头
         let headerRow = '<tr>';
         reorderedColumns.forEach(column => {
-            // 如果列名包含<br>标签，只显示第一部分
-            const columnText = column.split('<br>')[0];
+            // 将换行符替换为<br>标签，使表头支持中英文折行显示
+            let columnText = column;
+            
+            // 为"图片"添加英文翻译
+            if (column === '图片') {
+                columnText = '图片<br>Picture';
+            } else {
+                columnText = column.replace(/\n/g, '<br>');
+            }
+            
             headerRow += `<th>${columnText}</th>`;
         });
         headerRow += '</tr>';
