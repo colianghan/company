@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             
             // 确保图片路径正确
-            if (newItem['图片'] && typeof newItem['图片'] === 'string') {
+            if (newItem['图片'] && typeof newItem['图片'] === 'string' && newItem['图片'].trim() !== '') {
                 // 如果图片字段存在并且不为空
                 if (!newItem['图片'].startsWith('public/')) {
                     newItem['图片'] = `public/${newItem['图片']}`;
@@ -136,15 +136,14 @@ document.addEventListener('DOMContentLoaded', function() {
             // 获取图片
             let imgSrc = '';
             if (item['图片'] && typeof item['图片'] === 'string' && 
-                item['图片'].includes('image_') && 
                 item['图片'].match(/\.(jpe?g|png|gif|bmp|tiff)/i)) {
                 imgSrc = item['图片'];
             }
             
             // 获取产品信息
-            const productName = item['产品名称\r\nProduct name'] || '';
-            const price = item['单价\r\nUnitprice'] ? `${item['单价\r\nUnitprice']}` : '';
-            const quantity = item['数量\r\nquantity'] ? `${item['数量\r\nquantity']}` : '';
+            const productName = item['产品名称\nProduct name'] || '';
+            const price = item['单价\nUnitprice'] ? `${item['单价\nUnitprice']}` : '';
+            const quantity = item['数量\nquantity'] ? `${item['数量\nquantity']}` : '';
             
             // 创建卡片内容
             card.innerHTML = `
@@ -214,7 +213,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // 检查是否是图片路径
                 if (column === '图片' && typeof cellValue === 'string' && 
-                    cellValue.includes('image_') && 
                     cellValue.match(/\.(jpe?g|png|gif|bmp|tiff)/i)) {
                     cellValue = `<img src="${cellValue}" alt="商品图片" class="product-image" onclick="showImageModal(this.src)">`;
                 }
